@@ -12,6 +12,7 @@ export const paperTheme = {
     primary: '#0A1017',
     // primary: '#0F7EFE',
     background: '#0A1017',
+    backgroundSecondary: 'rgba(35,51,77,0.73)',
     myOwnColor: '#BADA55',
   },
 };

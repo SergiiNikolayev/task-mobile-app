@@ -36,7 +36,7 @@ export class Api {
 
 
 async getCityGeolocation(cityName?: string): Promise<{ kind: 'ok'; data: any } | GeneralApiProblem> {
-    const response = await this.apisauce.get(`${API_WEATHER_GEO}q=${cityName}&limit=5`);
+    const response = await this.apisauce.get(`${API_WEATHER_GEO}q=${cityName}&limit=8`);
 
     if (!response.ok) {
       return handleApiProblem(response);

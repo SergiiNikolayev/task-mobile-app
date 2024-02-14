@@ -1,10 +1,9 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { Dimensions, Image, StyleSheet, View } from 'react-native'
 import { AppStackScreenProps } from '../navigators';
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { IconButton, MD3Colors, Text } from 'react-native-paper'
-import { api } from '../services/api'
 import { paperTheme } from '../theme'
 
 const welcomeLogo = require('../assets/partly-cloudy-daytime.png');
@@ -12,22 +11,6 @@ interface WelcomeScreenProps extends AppStackScreenProps<'Welcome'> {}
 
 export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
-  const [city, setCity] = useState('London')
-
-  const fetchEpisodes = async () => {
-    const geo = await api.getCityGeolocation(city)
-    console.log('debug-geo ==>', geo)
-    if (geo.kind === 'ok') {
-      // const weather = await api.getCityWeather(geo.lat, geo.lon)
-      // console.log('debug-weather', weather)
-    }
-  }
-
-  useEffect(() => {
-    fetchEpisodes()
-  }, [])
-
   const navigateToSearchScreen = () => navigation.navigate('Search')
 
   return (
