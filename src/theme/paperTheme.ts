@@ -10,9 +10,9 @@ export const paperTheme = {
     fontSecondary: '#76828C',
     icon: '#0F7EFE',
     primary: '#0A1017',
-    // primary: '#0F7EFE',
     background: '#0A1017',
     backgroundSecondary: 'rgba(35,51,77,0.73)',
     myOwnColor: '#BADA55',
+    avatarBackground: '#15ABE3',
   },
 };
