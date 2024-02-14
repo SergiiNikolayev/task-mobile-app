@@ -32,7 +32,7 @@ export const CityWeatherScreen: FC<CityWeatherScreenProps> = function WelcomeScr
   const city = weather?.name
   const iconUrl = `https://openweathermap.org/img/wn/${weather?.weather[0].icon}@4x.png`
   const description = weather?.weather[0].description
-  const temperature = `${Math.round(weather?.main.temp)}°`
+  const temperature = weather?.main?.temp ? `${Math.round(weather?.main.temp)}°` : ''
 
   const info = useMemo(() => {
     return (
@@ -78,6 +78,7 @@ export const CityWeatherScreen: FC<CityWeatherScreenProps> = function WelcomeScr
       headerStyle: {
         backgroundColor: paperTheme.colors.background,
       },
+      headerTitle: '',
       headerLeft: () => (
         <IconButton
           icon='chevron-left'
@@ -110,26 +111,33 @@ export const CityWeatherScreen: FC<CityWeatherScreenProps> = function WelcomeScr
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {loading && <ActivityIndicator size='large' animating={true} color={paperTheme.colors.fontPrimary} />}
+      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         {error && (
           <Text style={styles.error} variant='bodyLarge'>
             {error}
           </Text>
         )}
-        <View style={styles.content}>
-          <Text style={styles.text} variant='displayMedium'>
-            {city}
-          </Text>
-          <Text style={styles.text} variant='titleMedium'>
-            {description}
-          </Text>
-          <Image style={styles.icon} source={{ uri: iconUrl }} resizeMode='contain' />
-          <Text style={styles.text} variant='displayMedium'>
-            {temperature}
-          </Text>
-        </View>
-        <View style={styles.itemContainer}>{info}</View>
+        {loading ? (
+          <ActivityIndicator size='large' animating={true} color={paperTheme.colors.fontPrimary} />
+        ) : (
+          <>
+          <View style={styles.content}>
+            <Text style={styles.text} variant='displayMedium'>
+              {city}
+            </Text>
+            <Text style={styles.text} variant='titleMedium'>
+              {description}
+            </Text>
+            <Image style={styles.icon} source={{ uri: iconUrl }} resizeMode='contain' />
+
+            <Text style={styles.text} variant='displayMedium'>
+              {temperature}
+            </Text>
+          </View>
+          <View style={styles.itemContainer}>{info}</View>
+          </>
+        )}
+
       </ScrollView>
     </SafeAreaView>
   )
@@ -140,6 +148,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: paperTheme.colors.background,
     justifyContent: 'flex-start',
+  },
+  contentContainerStyle: {
+    flexGrow: 1,
+    paddingBottom: 100,
   },
   itemContainer: {
     alignItems: 'center',

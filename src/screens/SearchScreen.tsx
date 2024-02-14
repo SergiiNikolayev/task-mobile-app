@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: paperTheme.colors.backgroundSecondary,
     color: paperTheme.colors.fontPrimary,
     borderRadius: 120,
+    marginTop: 20,
   },
   cityContainer: {
     marginTop: 20,

@@ -7,7 +7,6 @@ export interface CityCardProps {
   cityName: string
   country: string
   state: string
-  icon: string
   onPress: () => void
 }
 
