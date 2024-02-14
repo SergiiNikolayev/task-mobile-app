@@ -20,10 +20,10 @@ export function CityCard(props: CityCardProps) {
         <Avatar.Text style={styles.avatar} size={40} label={country} />
       </View>
       <View style={styles.cityContainer}>
-        <Text style={{ color: 'white' }} variant='headlineSmall'>
+        <Text style={styles.text} variant='headlineSmall'>
           {cityName}
         </Text>
-        <Text style={{ color: 'white' }} variant='bodySmall'>
+        <Text style={styles.text} variant='bodySmall'>
           {state}
         </Text>
       </View>
@@ -49,5 +49,8 @@ const styles = StyleSheet.create({
   },
   avatar: {
     backgroundColor: paperTheme.colors.avatarBackground,
+  },
+  text: {
+    color: 'white',
   },
 })

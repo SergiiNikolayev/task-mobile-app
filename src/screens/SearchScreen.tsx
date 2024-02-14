@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import _ from 'lodash'
-import { Button, SafeAreaView, StyleSheet, View, ActivityIndicator, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, View, ActivityIndicator, FlatList } from 'react-native'
 import { Text, TextInput } from 'react-native-paper'
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -13,7 +13,6 @@ interface SearchScreenProps extends AppStackScreenProps<'Search'> {}
 
 export const SearchScreen: FC<SearchScreenProps> = function WelcomeScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>()
-  const [units, setUnits] = useState('metric')
   const [city, setCity] = useState('')
   const [cityList, setCityList] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -23,12 +22,9 @@ export const SearchScreen: FC<SearchScreenProps> = function WelcomeScreen() {
     try {
       setLoading(true)
       setError('')
-      const geo = await api.getCityGeolocation(search, units)
-      console.log('debug-geo ==>', geo)
+      const geo = await api.getCityGeolocation(search)
       if (geo.kind === 'ok') {
         setCityList(geo.data)
-        // const weather = await api.getCityWeather(geo.lat, geo.lon)
-        // console.log('debug-weather', weather)
         if (!geo.data.length) {
           setError("Apologies, I couldn't locate anything.")
         }
@@ -56,9 +52,7 @@ export const SearchScreen: FC<SearchScreenProps> = function WelcomeScreen() {
     setCityList(null)
   }
 
-  const onCitySelect = (lat: number, lon: number) => {
-    console.log(lat, lon)
-  }
+  const onCitySelect = (lat: number, lon: number) => navigation.navigate('CityWeather', { lat, lon })
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,13 +88,6 @@ export const SearchScreen: FC<SearchScreenProps> = function WelcomeScreen() {
             )}
           />
         </View>
-
-        <Button
-          onPress={() => navigation.navigate('Welcome')}
-          title='Back'
-          color='#841584'
-          accessibilityLabel='Learn more about this purple button'
-        />
       </View>
     </SafeAreaView>
   )
