@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { AppStackScreenProps } from '../navigators';
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { IconButton, MD3Colors } from 'react-native-paper'
 import { api } from '../services/api'
+import { paperTheme } from '../theme'
 
 interface WelcomeScreenProps extends AppStackScreenProps<'Welcome'> {}
 
@@ -25,6 +27,8 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen() {
     fetchEpisodes()
   }, [])
 
+  const navigateToSearchScreen = () => navigation.navigate('Search')
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -33,11 +37,12 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen() {
       </View>
 
       <View style={styles.bottomContainer}>
-        <Button
-          onPress={() => navigation.navigate('Search')}
-          title="Test button"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
+        <IconButton
+          icon="arrow-right"
+          iconColor={MD3Colors.neutral100}
+          containerColor={paperTheme.colors.primary}
+          size={50}
+          onPress={navigateToSearchScreen}
         />
       </View>
     </View>
@@ -47,6 +52,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: paperTheme.colors.background,
   },
   topContainer: {
     flexShrink: 1,
@@ -55,12 +61,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bottomContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     flexShrink: 1,
     flexGrow: 0,
     flexBasis: '43%',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    justifyContent: 'space-around',
   },
 })
 
