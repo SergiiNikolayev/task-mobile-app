@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, View } from 'react-native'
 import { AppStackScreenProps } from '../navigators';
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { IconButton, MD3Colors } from 'react-native-paper'
+import { IconButton, MD3Colors, Text } from 'react-native-paper'
 import { api } from '../services/api'
 import { paperTheme } from '../theme'
 
+const welcomeLogo = require('../assets/partly-cloudy-daytime.png');
 interface WelcomeScreenProps extends AppStackScreenProps<'Welcome'> {}
 
 export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen() {
@@ -31,17 +32,19 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <Text>Text</Text>
-        <Text>Text</Text>
+      <Image style={styles.welcomeLogo} source={welcomeLogo} resizeMode="contain" />
+
+      <View style={styles.textContainer}>
+        <Text style={styles.title} variant="displayMedium">Breeze</Text>
+        <Text style={styles.description} variant="headlineMedium">Weather App</Text>
       </View>
 
-      <View style={styles.bottomContainer}>
+      <View style={styles.buttonContainer}>
         <IconButton
           icon="arrow-right"
           iconColor={MD3Colors.neutral100}
-          containerColor={paperTheme.colors.primary}
-          size={50}
+          containerColor={paperTheme.colors.icon}
+          size={30}
           onPress={navigateToSearchScreen}
         />
       </View>
@@ -53,19 +56,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: paperTheme.colors.background,
+    justifyContent: 'space-around',
   },
-  topContainer: {
-    flexShrink: 1,
-    flexGrow: 1,
-    flexBasis: '57%',
-    justifyContent: 'center',
+  welcomeLogo: {
+    marginTop: Dimensions.get('window').height * 0.15,
+    height: 150,
+    width: '100%',
   },
-  bottomContainer: {
-    justifyContent: 'center',
+  title: {
+    color: paperTheme.colors.fontPrimary,
+    marginBottom: 20,
+  },
+  description: {
+    color: paperTheme.colors.fontSecondary,
+  },
+  textContainer: {
     alignItems: 'center',
-    flexShrink: 1,
-    flexGrow: 0,
-    flexBasis: '43%',
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
 })
 

@@ -6,7 +6,11 @@ export const paperTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#0F7EFE',
+    fontPrimary: '#fff',
+    fontSecondary: '#76828C',
+    icon: '#0F7EFE',
+    primary: '#0A1017',
+    // primary: '#0F7EFE',
     background: '#0A1017',
     myOwnColor: '#BADA55',
   },
