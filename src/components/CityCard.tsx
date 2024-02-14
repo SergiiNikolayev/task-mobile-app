@@ -4,11 +4,11 @@ import { paperTheme } from '../theme'
 import { Avatar, Text } from 'react-native-paper'
 
 export interface CityCardProps {
-  cityName?: string
-  country?: string
-  state?: string
-  icon?: string
-  onPress?: () => void
+  cityName: string
+  country: string
+  state: string
+  icon: string
+  onPress: () => void
 }
 
 export function CityCard(props: CityCardProps) {
